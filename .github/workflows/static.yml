@@ -25,7 +25,7 @@ jobs:
     steps:
     # get latest source code
       - name: Checkout Code
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
     # copy file from runner to web folder
       - name: deploy to web folder
         run: |
