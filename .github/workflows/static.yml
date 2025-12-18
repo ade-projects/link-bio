@@ -30,7 +30,7 @@ jobs:
       - name: deploy to web folder
         run: |
           echo "🚀 Start deploy to server..."
-          rsync -av --delete ./ /var/www/link-bio/
+          rsync -vrlt --delete --no-o --no-g --exclude '.git' --exclude '.github' ./ /var/www/link-bio/
           echo "✅ Welldone! Website is up to date."
         
         
