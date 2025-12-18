@@ -25,13 +25,10 @@ jobs:
     steps:
     # get latest source code
       - name: Checkout Code
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
     # copy file from runner to web folder
       - name: deploy to web folder
         run: |
-          echo "🚀 Start deploy to server..."
-          rsync -av --delete ./ /var/www/link-bio/
-          echo "✅ Welldone! Website is up to date."
-        
+          rsync -rv --delete --no-perms --no-o --no-g --omit-dir-times --exclude=.git --exclude=.github ${{ github.workspace }}/ /var/www/link-bio/
         
         
