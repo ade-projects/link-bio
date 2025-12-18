@@ -1,0 +1,37 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static link bio page
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "deploy-to-vps"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    # get latest source code
+      - name: Checkout Code
+        uses: action/checkout@v4
+    # copy file from runner to web folder
+      - name: deploy to web folder
+        run: |
+          echo "🚀 Start deploy to server..."
+          rsync -av --delete ./ /var/www/link-bio/
+          echo "✅ Welldone! Website is up to date."
+        
+        
+        
